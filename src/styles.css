@@ -29,11 +29,6 @@ title-text h1{
     display:flex;
     justify-content: center;
 }
-title-text p{
-    display:flex;
-    font-size:13px;
-    justify-content: center;
-}
 
 .messages {
   padding: 1rem;
@@ -67,6 +62,30 @@ title-text p{
     align-self: flex-start;
     margin-left: auto;
     border-radius: 15px 15px 4px 15px;
+}
+.edit-button{
+
+    display:block;
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+}
+.edit-button:hover {
+  background-color: #0056b3;
+}
+.delete-button{
+
+    display:block;
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #812f10;
+    color: white;
+    border-radius: 5px;
+}
+.delete-button:hover {
+  background-color: hsl(17, 82%, 47%);
 }
 
 .input-area {

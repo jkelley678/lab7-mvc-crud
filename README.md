@@ -2,6 +2,8 @@
 
 
 COMP305 2025 Lab 7 Assignment
+## Goals
+The goals of this project is to implement Separation of Concerns, using what we built in the previous lab and make it more maintainable. localStorage() will be added, and implementations of export and import buttons will be created. 
 
 ## Project structure
 
@@ -20,3 +22,11 @@ lab7-mvc-crud/
 ├─	├─	├─ view.js
 └─  └─	└─ eliza.js
 ```
+## Process
+My plan is to implement the edit, delete, and clear buttons first. Then separate code into model.js, view.js, and controller.js, and app.js. Next, I will implement the export and import function sall while cleaning up localStorage. 
+
+## License
+This project is licensed under the MIT License - see LICENSE.md for details.
+
+## Author
+Jackson Kelley
