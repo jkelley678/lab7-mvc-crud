@@ -64,6 +64,15 @@ addMessage(sender, text) {
       });
       messageEl.appendChild(editBtn);
   }
+    const timestampEl = document.createElement('span');
+  const now = new Date();
+  const hours = now.getHours().toString().padStart(2, '0');
+  const minutes = now.getMinutes().toString().padStart(2, '0');
+  const seconds = now.getSeconds().toString().padStart(2, '0');
+  timestampEl.textContent = `${hours}:${minutes}:${seconds}`;
+  timestampEl.className = 'timestamp';
+
+  messageEl.appendChild(timestampEl);
   
 
   this.messagesContainer.appendChild(messageEl);
