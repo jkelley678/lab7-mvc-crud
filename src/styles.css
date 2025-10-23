@@ -1,7 +1,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
+    background: linear-gradient(to left, #28a745, #dbaf03, #28a745);
     margin: 0;
     padding: 2rem;
     display:flex;
@@ -59,8 +59,20 @@ title-text h1{
   color: white;
   border-radius: 5px;
 }
-#export-button:hover { background-color: #1e7e34; }
+#export-button:hover { 
+  background-color: #1e7e34;
+ }
 
+#import-button{
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #16e8f7;
+  color: white;
+  border-radius: 5px;
+}
+#import-button:hover { 
+  background-color: #0691b1;
+ }
 .messages {
   padding: 1rem;
   height: 600px;
