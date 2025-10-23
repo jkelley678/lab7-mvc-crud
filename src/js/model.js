@@ -2,6 +2,7 @@ class ChatModel {
   constructor() {
     this.messages = [];
   }
+
   addMessage(sender, text) {
     const message = {
       id: Date.now(),
@@ -12,16 +13,16 @@ class ChatModel {
     this.messages.push(message);
     return message;
   }
-  deleteMessage(messageEl) {
-    const index = Array.from(messageEl.parentNode.children).indexOf(messageEl);
+
+  deleteMessage(id) {
+    const index = this.messages.findIndex(msg => msg.id === id);
     this.messages.splice(index, 1);
   }
 
   editMessage(id, newText) {
     const message = this.messages.find(msg => msg.id === id);
-    if (message) {
-      message.text = newText;
-    }
+    message.text = newText;
+
   }
 
   clearMessages() {

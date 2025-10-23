@@ -15,25 +15,37 @@ class ChatView {
     textEl.textContent = text;
     messageEl.appendChild(textEl);
 
+    // put action buttons into their own controls row so they appear on a separate line
+    let controls = null;
     if (sender === 'user') {
+      controls = document.createElement('div');
+      controls.className = 'controls';
+
       const deleteBtn = document.createElement('button');
       deleteBtn.textContent = 'Delete';
       deleteBtn.className = 'delete-button';
       deleteBtn.addEventListener('click', () => onDelete(messageEl));
-      messageEl.appendChild(deleteBtn);
+      controls.appendChild(deleteBtn);
 
       const editBtn = document.createElement('button');
       editBtn.textContent = 'Edit';
       editBtn.className = 'edit-button';
       editBtn.addEventListener('click', () => onEdit(textEl, id));
-      messageEl.appendChild(editBtn);
+      controls.appendChild(editBtn);
+
+      messageEl.appendChild(controls);
     }
 
     const timestampEl = document.createElement('span');
     const now = new Date();
     timestampEl.textContent = `${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}:${now.getSeconds().toString().padStart(2,'0')}`;
     timestampEl.className = 'timestamp';
-    messageEl.appendChild(timestampEl);
+    // if controls exist (user message), put timestamp in the same row as buttons
+    if (controls) {
+      controls.appendChild(timestampEl);
+    } else {
+      messageEl.appendChild(timestampEl);
+    }
 
     this.messagesContainer.appendChild(messageEl);
     this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;

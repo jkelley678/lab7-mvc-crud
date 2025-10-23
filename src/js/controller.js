@@ -3,6 +3,8 @@ class ChatController {
     this.model = model;
     this.view = view;
     this.getBotResponse = getBotResponse;
+    this.loadMessages();
+    
 
     this.view.addMessage('bot', 'Bot: Hello! How can I help you today?', Date.now(), null, null);
 
@@ -17,14 +19,15 @@ class ChatController {
         (textEl, id) => this.editMessage(textEl, id)
       );
       this.view.clearInput();
+      this.saveMessages();
       
       localStorage.setItem('user', JSON.stringify(message));
-      alert("Your message has been sent to local storage.");
 
       const response = this.getBotResponse(message);
       this.model.addMessage('bot', response);
       this.view.addMessage('bot', "Bot: " + response, Date.now(), null, null);
       localStorage.setItem('bot', JSON.stringify(message));
+      this.saveMessages();
     });
 
     if (this.view.clearButton) {
@@ -33,9 +36,11 @@ class ChatController {
   }
 
   deleteMessage(messageEl) {
-    this.model.deleteMessage(messageEl);
-    this.view.messagesContainer.removeChild(messageEl);
-  }
+  const id = parseInt(messageEl.dataset.id);
+  this.model.deleteMessage(id);
+  this.view.messagesContainer.removeChild(messageEl);
+  this.saveMessages(); 
+}
 
   editMessage(textEl, id) {
     const currentText = textEl.textContent.replace(/^User:\s*/, '');
@@ -53,6 +58,31 @@ class ChatController {
       localStorage.clear();
       alert('Chat history and localStorage have been cleared.');
     }
+  }
+  loadMessages() {
+    const savedMessages = localStorage.getItem('chatMessages');
+    if (savedMessages) {
+      try {
+        const messages = JSON.parse(savedMessages);
+        this.model.messages = messages;
+
+        messages.forEach(msg => {
+          if (msg.sender === 'user') {
+            this.view.addMessage('user', "User: " + msg.text, msg.id,
+              (el) => this.deleteMessage(el),
+              (textEl, id) => this.editMessage(textEl, id)
+            );
+          } else {
+            this.view.addMessage('bot', "Bot: " + msg.text, msg.id, null, null);
+          }
+        });
+      } catch (e) {
+        console.error('Error loading messages from localStorage:', e);
+      }
+    }
+  }
+  saveMessages() {
+    localStorage.setItem('chatMessages', JSON.stringify(this.model.messages));
   }
 }
 
