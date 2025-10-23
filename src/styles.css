@@ -40,6 +40,21 @@ title-text h1{
   background-color: #0056b3;
 }
 
+.controls-header {
+  display:flex;
+  gap:0.5rem;
+  align-items:center;
+}
+
+#export-button{
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #28a745;
+  color: white;
+  border-radius: 5px;
+}
+#export-button:hover { background-color: #1e7e34; }
+
 .messages {
   padding: 1rem;
   height: 600px;
@@ -109,7 +124,7 @@ title-text h1{
   font-size: 0.75em;
   color: #ffffff;
   margin-left: 8px;
-  margin-left: auto; /* push timestamp to the right inside .controls */
+  margin-left: auto; 
 }
 .input-area {
     display: flex;

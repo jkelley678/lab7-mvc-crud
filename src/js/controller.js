@@ -33,6 +33,11 @@ class ChatController {
     if (this.view.clearButton) {
       this.view.clearButton.addEventListener('click', () => this.clearChat());
     }
+
+    const exportBtn = document.getElementById('export-button');
+    if (exportBtn) {
+      exportBtn.addEventListener('click', () => this.exportLocalStorage());
+    }
   }
 
   deleteMessage(messageEl) {
@@ -83,6 +88,34 @@ class ChatController {
   }
   saveMessages() {
     localStorage.setItem('chatMessages', JSON.stringify(this.model.messages));
+  }
+
+  exportLocalStorage() {
+    try {
+      const data = {};
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        try {
+          data[key] = JSON.parse(localStorage.getItem(key));
+        } catch (e) {
+          data[key] = localStorage.getItem(key);
+        }
+      }
+
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      const now = new Date().toISOString().replace(/[:.]/g, '-');
+      a.href = url;
+      a.download = `lab7-localStorage-${now}.json`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch (e) {
+      console.error('Export failed', e);
+      alert('Failed to export localStorage. See console for details.');
+    }
   }
 }
 

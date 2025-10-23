@@ -14,8 +14,6 @@ class ChatView {
     const textEl = document.createElement('div');
     textEl.textContent = text;
     messageEl.appendChild(textEl);
-
-    // put action buttons into their own controls row so they appear on a separate line
     let controls = null;
     if (sender === 'user') {
       controls = document.createElement('div');
@@ -40,7 +38,6 @@ class ChatView {
     const now = new Date();
     timestampEl.textContent = `${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}:${now.getSeconds().toString().padStart(2,'0')}`;
     timestampEl.className = 'timestamp';
-    // if controls exist (user message), put timestamp in the same row as buttons
     if (controls) {
       controls.appendChild(timestampEl);
     } else {
