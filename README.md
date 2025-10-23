@@ -16,17 +16,21 @@ lab7-mvc-crud/
 ├─  ├─ index.html
 ├─	├─ styles.css
 ├─	├─ js/
-├─	├─	├─ app.js
-├─	├─	├─ controller.js
-├─	├─	├─ model.js
-├─	├─	├─ view.js
-└─  └─	└─ eliza.js
+├─	├─	├─ app.js  # handles initialization aspect of the chatbot
+├─	├─	├─ controller.js # handles the user actions, containing the event wiring and import/export logic
+├─	├─	├─ model.js      # handles message list and provides CRUD operations
+├─	├─	├─ view.js       # Renders messages to the DOM and provides soem small UI Helpers
+└─  └─	└─ eliza.js      # Chat bot that responds to users inputs
 ```
 ## Process
 My plan is to implement the edit, delete, and clear buttons first. Then separate code into model.js, view.js, and controller.js, and app.js. Next, I will implement the export and import function sall while cleaning up localStorage.
 
 ## Published page
 Published page will be implemented later. Waiting on how to work CloudFlare or Netlify.
+## Challenges
+Struggled with the localStorage aspect of the chatbot. I was able to figure out an acceptable solution.
+
+Struggled with hte importing of files. Was able to import the text, but wasnt' able to add new messages. I was able to figure out an acceptable solution.
 ## License
 This project is licensed under the MIT License - see LICENSE.md for details.
 
