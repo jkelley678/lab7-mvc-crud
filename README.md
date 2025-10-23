@@ -23,8 +23,12 @@ lab7-mvc-crud/
 └─  └─	└─ eliza.js
 ```
 ## Process
-My plan is to implement the edit, delete, and clear buttons first. Then separate code into model.js, view.js, and controller.js, and app.js. Next, I will implement the export and import function sall while cleaning up localStorage. 
+My plan is to implement the edit, delete, and clear buttons first. Then separate code into model.js, view.js, and controller.js, and app.js. Next, I will implement the export and import function sall while cleaning up localStorage.
 
+## Notes
+Note: Decided not to implement export and import funtions.
+## Published page
+Published page will be implemented later. Waiting on how to work CloudFlare or Netlify.
 ## License
 This project is licensed under the MIT License - see LICENSE.md for details.
 
