@@ -4,6 +4,7 @@ class ChatView {
     this.form = component.querySelector('form.input-area');
     this.input = component.querySelector('input');
     this.clearButton = document.getElementById('clear-button');
+    this.messageCountEl = document.getElementById('message-count');
   }
 
   addMessage(sender, text, id, onDelete, onEdit) {
@@ -46,10 +47,24 @@ class ChatView {
 
     this.messagesContainer.appendChild(messageEl);
     this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
+    this.updateMessageCount(1);
   }
 
   clearChat() {
     this.messagesContainer.innerHTML = '';
+    this.updateMessageCount(true);
+  }
+
+  updateMessageCount(deltaOrReset) {
+    if (!this.messageCountEl) return;
+    if (deltaOrReset === true) {
+
+      const count = this.messagesContainer.querySelectorAll('.message').length;
+      this.messageCountEl.textContent = count;
+      return;
+    }
+    const current = parseInt(this.messageCountEl.textContent || '0', 10);
+    this.messageCountEl.textContent = Math.max(0, current + Number(deltaOrReset));
   }
 
   getInputValue() {

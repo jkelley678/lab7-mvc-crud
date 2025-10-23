@@ -46,6 +46,12 @@ title-text h1{
   align-items:center;
 }
 
+.header-right{
+  margin-left: auto;
+  color: white;
+  font-weight: 600;
+}
+
 #export-button{
   padding: 0.5rem 1rem;
   border: none;

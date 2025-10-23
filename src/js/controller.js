@@ -38,6 +38,10 @@ class ChatController {
     if (exportBtn) {
       exportBtn.addEventListener('click', () => this.exportLocalStorage());
     }
+    const importBtn = document.getElementById('import-button');
+    if (importBtn) {
+      importBtn.addEventListener('click', () => this.importLocalStorage());
+    }
   }
 
   deleteMessage(messageEl) {
@@ -45,6 +49,7 @@ class ChatController {
   this.model.deleteMessage(id);
   this.view.messagesContainer.removeChild(messageEl);
   this.saveMessages(); 
+  if (this.view.updateMessageCount) this.view.updateMessageCount(-1);
 }
 
   editMessage(textEl, id) {
@@ -81,6 +86,7 @@ class ChatController {
             this.view.addMessage('bot', "Bot: " + msg.text, msg.id, null, null);
           }
         });
+        if (this.view.updateMessageCount) this.view.updateMessageCount(true);
       } catch (e) {
         console.error('Error loading messages from localStorage:', e);
       }
@@ -115,6 +121,43 @@ class ChatController {
     } catch (e) {
       console.error('Export failed', e);
       alert('Failed to export localStorage. See console for details.');
+    }
+  }
+    async importLocalStorage() {
+    try {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = '.json';
+
+      input.addEventListener('change', async (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const text = await file.text();
+        const data = JSON.parse(text);
+
+        if (!data.chatMessages) {
+          alert('Invalid file format. No chatMessages found.');
+          return;
+        }
+
+        localStorage.clear();
+        for (const [key, value] of Object.entries(data)) {
+          localStorage.setItem(key, JSON.stringify(value));
+        }
+
+        this.model.messages = data.chatMessages;
+        this.view.clearChat();
+        this.loadMessages();
+        this.saveMessages();
+
+        alert('Chat history successfully imported!');
+      });
+
+      input.click();
+    } catch (e) {
+      console.error('Import failed', e);
+      alert('Failed to import chat history. See console for details.');
     }
   }
 }
