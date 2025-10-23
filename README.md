@@ -26,7 +26,7 @@ lab7-mvc-crud/
 My plan is to implement the edit, delete, and clear buttons first. Then separate code into model.js, view.js, and controller.js, and app.js. Next, I will implement the export and import function sall while cleaning up localStorage.
 
 ## Published page
-Published page will be implemented later. Waiting on how to work CloudFlare or Netlify.
+https://shiny-baklava-b58ceb.netlify.app/
 ## Challenges
 Struggled with the localStorage aspect of the chatbot. I was able to figure out an acceptable solution.
 
